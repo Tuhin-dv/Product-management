@@ -3,7 +3,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 text-gray-300  py-10">
+    <footer className="bg-gradient-to-r from-gray-900 via-indigo-900 border-t border-purple-500 to-purple-900 text-gray-300  py-10">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">

@@ -1,80 +1,75 @@
 "use client"
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { signIn } from "next-auth/react";
+import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-const schema = z.object({
-  username: z.string().min(3, "Username is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
+export default function LoginPage() {
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError("")
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    })
+    setLoading(false)
+    if (res.error) setError("Invalid email or password")
+    else router.push("/dashboard")
+  }
 
-  const onSubmit = async (data) => {
-    await signIn("credentials", {
-      ...data,
-      callbackUrl: "/products",
-    });
-  };
+  const handleGoogleLogin = async () => {
+    await signIn("google", { callbackUrl: "/dashboard" })
+  }
 
   return (
-    <div className="max-w-md mx-auto mt-16 p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20">
-      <h2 className="text-3xl font-bold text-center text-white mb-2">Login</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        <div>
-          <label className="block text-gray-200 mb-1">Username</label>
-          <input
-            type="text"
-            {...register("username")}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Enter your username"
-          />
-          {errors.username && (
-            <p className="text-red-400 text-sm mt-1">{errors.username.message}</p>
-          )}
-        </div>
-        <div>
-          <label className="block text-gray-200 mb-1">Password</label>
-          <input
-            type="password"
-            {...register("password")}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="Enter your password"
-          />
-          {errors.password && (
-            <p className="text-red-400 text-sm mt-1">{errors.password.message}</p>
-          )}
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <form className="w-full max-w-md p-8 bg-white rounded-3xl shadow-xl space-y-6" onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-bold text-center text-gray-800">Login</h1>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+          className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full py-3 text-lg font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-lg hover:opacity-90 transition"
+          disabled={loading}
+          className="w-full py-2 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition"
         >
-          {isSubmitting ? "Logging in..." : "Login"}
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+        <div className="flex items-center justify-center text-gray-400">OR</div>
+
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="w-full py-2 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition"
+        >
+          Login with Google
         </button>
       </form>
-      <div className="flex items-center gap-3 my-4">
-        <div className="flex-1 h-[1px] bg-white/20"></div>
-        <span className="text-gray-400 text-sm">OR</span>
-        <div className="flex-1 h-[1px] bg-white/20"></div>
-      </div>
-      <button
-        onClick={() => signIn("google", { callbackUrl: "/products" })}
-        className="w-full py-3 text-lg font-semibold text-gray-900 bg-white rounded-xl shadow hover:bg-gray-100 transition"
-      >
-        Continue with Google
-      </button>
     </div>
-  );
+  )
 }
-
-export default LoginForm;

@@ -45,56 +45,56 @@ export default function AddProductPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center ">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 space-y-6"
+        className="w-full max-w-md p-8 text-black backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 space-y-6"
       >
-        <h2 className="text-2xl font-bold text-center text-white mb-4">Add New Product</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-700 mb-4">Add New Product</h2>
         <div>
-          <label className="block text-gray-200 mb-1">Product Name</label>
+          <label className="block text-black mb-1">Product Name</label>
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2  text-black placeholder-gray-400 bg-white/5 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter product name"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-200 mb-1">Product Image URL</label>
+          <label className="block text-black mb-1">Product Image URL</label>
           <input
             type="text"
             name="img"
             value={form.img}
             onChange={handleChange}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2  text-white placeholder-gray-400 bg-white/5 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter image URL"
             required
           />
         </div>
         <div>
-          <label className="block text-gray-200 mb-1">Product Description</label>
+          <label className="block text-black mb-1">Product Description</label>
           <textarea
             name="description"
             value={form.description}
             onChange={handleChange}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2  text-white placeholder-gray-400 bg-white/5 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter product description"
             rows={3}
             required
           />
         </div>
         <div>
-          <label className="block text-gray-200 mb-1">Product Price $</label>
+          <label className="block text-black mb-1">Product Price $</label>
           <input
             type="number"
             name="price"
             value={form.price}
             onChange={handleChange}
-            className="w-full px-4 py-2 text-white placeholder-gray-400 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2  text-white placeholder-gray-400 bg-white/5 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500"
             placeholder="Enter product price "
             required
           />
