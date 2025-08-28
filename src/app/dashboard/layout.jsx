@@ -21,8 +21,6 @@ export default function DashboardLayout({ children }) {
     )
   }
 
-  // Protect dashboard routes
-  if (!session) redirect("/login")
 
   const handleLinkClick = () => setSidebarOpen(false)
 
