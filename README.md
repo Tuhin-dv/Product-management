@@ -13,7 +13,7 @@ Users can view products, see product details, and manage products via a protecte
 
 ## Live Site
 
-[View Live Site](https://your-vercel-deployment-url.com)
+[View Live Site]([https://your-vercel-deployment-url.com](https://product-management-lake.vercel.app/))
 
 ---
 
