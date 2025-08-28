@@ -7,13 +7,13 @@ Users can view products, see product details, and manage products via a protecte
 
 ## GitHub Repository
 
-[GitHub Repo](https://github.com/your-username/your-repo-name)
+[GitHub Repo](https://github.com/Tuhin-dv/Product-management?tab=readme-ov-file#live-site)
 
 ---
 
 ## Live Site
 
-[View Live Site]([https://your-vercel-deployment-url.com](https://product-management-lake.vercel.app/))
+[View Live Site](https://product-management-lake.vercel.app/)
 
 ---
 
@@ -36,5 +36,6 @@ This project demonstrates a full-stack Next.js application with:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Tuhin-dv/Product-management.git
+cd Product-management
+
